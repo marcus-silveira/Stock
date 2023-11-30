@@ -1,5 +1,5 @@
 import { PrismaService } from './../prisma/prisma.service';
-import { Injectable } from '@nestjs/common';
+import { HttpCode, Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 
@@ -17,18 +17,25 @@ export class ProductsService {
   }
 
   findAll() {
-    return `This action returns all products`;
+    return this.prismaService.product.findMany();
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} product`;
+    return this.prismaService.product.findUnique({
+      where: { id },
+    });
   }
 
   update(id: number, updateProductDto: UpdateProductDto) {
-    return `This action updates a #${id} product`;
+    return this.prismaService.product.update({
+      where: { id },
+      data: updateProductDto,
+    });
   }
 
   remove(id: number) {
-    return `This action removes a #${id} product`;
+    return this.prismaService.product.delete({
+      where: { id },
+    });
   }
 }
