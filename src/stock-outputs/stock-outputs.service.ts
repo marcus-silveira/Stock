@@ -60,7 +60,7 @@ export class StockOutputsService {
       });
     } catch (error) {
       if (error.code === 'P2025')
-        throw new NotFoundError(`Stock input with ID ${id} not found`);
+        throw new NotFoundError(`Stock output with ID ${id} not found`);
     }
     throw error;
   }
